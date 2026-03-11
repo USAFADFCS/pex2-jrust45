@@ -1,7 +1,7 @@
 /** main.c
  * ===========================================================
- * Name: <Last Name, First Name>
- * Section: <Section>
+ * Name: Rust III, John
+ * Section: M4
  * Project: PEX2 - CPU Scheduling Simulator
  * Purpose: Entry point for the multi-threaded CPU scheduling simulator.
  *          Reads simulation parameters from command-line arguments or

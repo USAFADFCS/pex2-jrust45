@@ -1,7 +1,7 @@
 /** CPUs.c
  * ===========================================================
- * Name: <Last Name, First Name>
- * Section: <Section>
+ * Name: Rust III, John
+ * Section: M4
  * Project: PEX2 - CPU Scheduling Simulator
  * Purpose: Implements six CPU scheduling algorithms as POSIX threads.
  *          Each thread follows the same pattern every timestep:
@@ -15,6 +15,7 @@
  *          respective mutex locks.
  * ===========================================================
  * Documentation Statement: <describe any help received>
+ * 
  * =========================================================== */
 
 #include <stdio.h>
@@ -80,7 +81,7 @@ void* FIFOcpu(void* param) {
             p->burstRemaining--;
 
             if (p->burstRemaining == 0) {
-                // Process is done — move it to finishedQ so main can
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
                 // compute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
