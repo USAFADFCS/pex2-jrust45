@@ -245,9 +245,14 @@ void* RRcpu(void* param) {
     int threadNum = ((CpuParams*) param)->threadNumber;
     SharedVars* svars = ((CpuParams*) param)->svars;
 
+    int num_timesteps = 0;
+    bool out_of_quantum = false;
+
     // p is the process currently running on this CPU.
     // p == NULL means the CPU is idle and must pick a new process from readyQ.
     Process* p = NULL;
+    Process* p_requeue = NULL;
+
 
     // This thread runs forever — one loop iteration = one simulation timestep.
     while (1) {
@@ -268,7 +273,12 @@ void* RRcpu(void* param) {
             // qPriority returns the position with the highest-priority process (lowest
             // number) in the ReadyQ (that is the NNP selection rule).
             
-            //NEED TO EDIT HERE p = qRemove(&(svars->readyQ), qPriority(&(svars->readyQ)));
+            if (out_of_quantum) {
+                p_requeue->requeued = true;
+                qInsert(&(svars->readyQ), p_requeue);
+                out_of_quantum = false;
+            }
+            p = qRemove(&(svars->readyQ), 0);
 
             if (p == NULL) {
                 // readyQ was empty — CPU stays idle this tick.
@@ -285,6 +295,7 @@ void* RRcpu(void* param) {
         // selected above), burn one unit of its remaining CPU burst.
         if (p != NULL) {
             p->burstRemaining--;
+            num_timesteps++;
 
             if (p->burstRemaining == 0) {
                 // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
@@ -295,6 +306,14 @@ void* RRcpu(void* param) {
 
                 // CPU is now idle; it will select a new process next tick.
                 p = NULL;
+
+                num_timesteps = 0;
+            }
+            else if (num_timesteps == svars->quantum && p->burstRemaining != 0) { //
+                p_requeue = p;
+                p = NULL;
+                num_timesteps = 0;
+                out_of_quantum = true;
             }
         }
 
