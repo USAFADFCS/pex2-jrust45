@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "pex2",
-            "args": [],
+            "args": ["1", "25", "1", "5"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -30,7 +30,7 @@
             "request": "launch",
             "name": "lldb - MacOS",
             "program": "pex2",
-            "args": [],
+            "args": ["1", "25", "1", "5"],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "C/C++: gcc build active file"
         }
