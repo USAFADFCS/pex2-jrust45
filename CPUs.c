@@ -14,12 +14,11 @@
  *          All accesses to readyQ and finishedQ are protected by their
  *          respective mutex locks.
  * ===========================================================
- * Documentation Statement: <describe any help received>
+ * Documentation Statement: See documentation statement in main.c on line 15
  * 
  * =========================================================== */
 
 #include <stdio.h>
-#include <limits.h>
 #include "CPUs.h"
 #include "processQueue.h"
 
@@ -82,8 +81,8 @@ void* FIFOcpu(void* param) {
             p->burstRemaining--;
 
             if (p->burstRemaining == 0) {
-                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
-                // compute and print wait-time statistics at simulation end.
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to 
+                // finishedQ so main cancompute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
                 pthread_mutex_unlock(&(svars->finishedQLock));
@@ -150,8 +149,8 @@ void* SJFcpu(void* param) {
             p->burstRemaining--;
 
             if (p->burstRemaining == 0) {
-                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
-                // compute and print wait-time statistics at simulation end.
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to 
+                // finishedQ so main cancompute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
                 pthread_mutex_unlock(&(svars->finishedQLock));
@@ -219,8 +218,8 @@ void* NPPcpu(void* param) {
             p->burstRemaining--;
 
             if (p->burstRemaining == 0) {
-                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
-                // compute and print wait-time statistics at simulation end.
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to 
+                // finishedQ so main cancompute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
                 pthread_mutex_unlock(&(svars->finishedQLock));
@@ -299,8 +298,8 @@ void* RRcpu(void* param) {
             num_timesteps++;
 
             if (p->burstRemaining == 0) {
-                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
-                // compute and print wait-time statistics at simulation end.
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to 
+                // finishedQ so main cancompute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
                 pthread_mutex_unlock(&(svars->finishedQLock));
@@ -393,8 +392,8 @@ void* SRTFcpu(void* param) {
             p->burstRemaining--;
 
             if (p->burstRemaining == 0) {
-                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
-                // compute and print wait-time statistics at simulation end.
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to 
+                // finishedQ so main cancompute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
                 pthread_mutex_unlock(&(svars->finishedQLock));
@@ -479,8 +478,8 @@ void* PPcpu(void* param) {
             p->burstRemaining--;
 
             if (p->burstRemaining == 0) {
-                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to finishedQ so main can
-                // compute and print wait-time statistics at simulation end.
+                // Process is done — // readyQ was empty — CPU stays idle this tick.move it to 
+                // finishedQ so main cancompute and print wait-time statistics at simulation end.
                 pthread_mutex_lock(&(svars->finishedQLock));
                 qInsert(&(svars->finishedQ), p);
                 pthread_mutex_unlock(&(svars->finishedQLock));

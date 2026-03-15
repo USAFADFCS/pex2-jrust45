@@ -12,16 +12,21 @@
  *          Supports sequential (default) and parallel CPU signaling modes;
  *          see usage() for the full argument list and a description of each.
  * ===========================================================
- * Documentation Statement: <describe any help received>
+ * Documentation Statement: I received no help from any person or LLM in the completion of
+ * this PEX. I did brainstorm a few ideas with C1C Watson but it was really just me going line
+ * by line through the outputs of the PEX. I had a lot of debugging and a lack of understanding
+ * the PEX until the end of RR. Basically I got confused with the Position Selectors and the
+ * Value helpers a lot, and I mean a lot. The total time it took me to complete this PEX was 
+ * around 4 hours and 26 minutes.
  * ===========================================================
  * ======================================================================
- * Required Features Not Included:1
- *       1)
+ * Required Features Not Included:
+ *       1) All required features included
  *       2)
  *       3)
  * ======================================================================
  * Known Bugs:
- *       1)
+ *       1) None
  *       2)
  *       3)
  * ====================================================================== */
@@ -43,8 +48,8 @@
 // Process generation parameters (govern the randomly generated workload)
 #define MAX_TIME_BETWEEN 7   // inter-arrival gap is rand_r() % MAX_TIME_BETWEEN (0 to 6 steps)
 #define MAX_BURST        10  // CPU burst is (rand_r() % MAX_BURST) + 1 (1 to 10 timesteps)
-#define MAX_PRIORITY      6  // priority is rand_r() % MAX_PRIORITY (0 to 5; lower = higher priority)
-
+#define MAX_PRIORITY      6  // priority is rand_r() % MAX_PRIORITY (0 to 5; 
+                             //                                      lower = higher priority)
 void genProcess(SharedVars* shared, int* timeToNextProcess,
                 int* nextPid, int* randSeed, int currTime);
 void init(int numProcesses, SharedVars* svars, int quantum);
@@ -58,8 +63,8 @@ int main(int argc, char* argv[]) {
     int cpuType = 0;          // scheduling algorithm selection (1–6)
     int quantum = 0;          // round-robin time slice; only used when cpuType == 4
     bool debugOutput = false;       // when true, print queue snapshots each timestep
-    bool parallelSignaling = false; // when true, signal all CPUs concurrently (non-deterministic);
-                                    // default false = sequential (one CPU at a time, deterministic)
+    bool parallelSignaling = false; // when true, signal all CPUs concurrently (non-deterministic)
+                                    // default false = sequential (one CPU @ a time, deterministic)
     char input[MAX_INPUT_LEN];      // buffer for interactive prompts
 
     // parse command-line arguments; any missing values are requested interactively
